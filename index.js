@@ -1,10 +1,21 @@
 const mineflayer = require('mineflayer');
+const http = require('http');
+
+// This keeps Render happy so your service never turns off
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Bot is running online 24/7!\n');
+});
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Web server listening on port ${PORT}`);
+});
 
 function createBot() {
     const bot = mineflayer.createBot({
-        host: 'oneblocky1221.aternos.me', // Your exact Aternos IP
-        port: 16363,                      // <-- REPLACE 12345 with your actual 5-digit Aternos port!
-        username: 'AFK_bot'      // Pick any name you want for your bot
+        host: 'oneblocky1221.aternos.me', 
+        port: 16363,                      // Your exact Aternos port!
+        username: 'AFK_Bot_OneBlock'      
     });
 
     bot.on('spawn', () => {
